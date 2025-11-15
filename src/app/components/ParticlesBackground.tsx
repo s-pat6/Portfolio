@@ -1,88 +1,61 @@
 'use client';
 
 import React, { useEffect } from 'react';
-
-declare global {
-  interface Window {
-    particlesJS: {
-      load: (
-        id: string,
-        path: string,
-        callback: () => void
-      ) => void;
-    };
-  }
-}
+import { Particles, initParticlesEngine } from '@tsparticles/react';
+import { loadFull } from 'tsparticles';
 
 const ParticlesBackground = () => {
+  const particlesOptions = {
+    fpsLimit: 30,
+    particles: {
+      number: { value: 120, density: { enable: true, valueArea: 800 } },
+      color: { value: ['#a78bfa', '#60a5fa', '#f472b6', '#c084fc'] },
+      shape: { type: 'circle' },
+      size: { value: 3, random: true },
+      lineLinked: { enable: true, distance: 150, color: '#a78bfa', opacity: 0.5, width: 1 },
+      links: { enable: true, distance: 150, color: '#a78bfa', opacity: 0.5, width: 1 },
+      move: { enable: true, speed: 1, direction: 'none', random: false, straight: false, outMode: 'out', bounce: false, attract: false }
+    },
+    interactivity: {
+      detectOn: 'window',
+      events: {
+        onHover: { enable: true, mode: ['grab'] },
+        onClick: { enable: true, mode: ['push', 'remove'] },
+        resize: true
+      },
+      modes: {
+        grab: { distance: 300, lineLinked: { opacity: 0.5 }, links: { opacity: 0.5 } },
+        bubble: { distance: 200, size: 20, duration: 2, opacity: 8, speed: 3 },
+        repulse: { distance: 200, duration: 0.4 },
+        push: { particlesNb: 4 },
+        remove: { particlesNb: 2 }
+      }
+    }
+  };
+  
   useEffect(() => {
-    // Load particles.js
-    const loadParticles = async () => {
-      if (typeof window === 'undefined') return;
-
-      try {
-        // Try to use the npm package first
-        const particlesModule = await import('particles.js');
-        
-        // particles.js exports differently, handle both cases
-        if (particlesModule && !window.particlesJS) {
-          // @ts-ignore - particles.js may not have proper types
-          window.particlesJS = particlesModule.default || particlesModule;
-        }
-
-        // Initialize particles
-        if (window.particlesJS && window.particlesJS.load) {
-          window.particlesJS.load('particles-js', '/particles.json', function() {
-            console.log('Particles.js config loaded');
-          });
-        }
-      } catch (error) {
-        // Fallback to CDN if npm import fails
-        console.log('Falling back to CDN for particles.js');
-        if (!window.particlesJS) {
-          const script = document.createElement('script');
-          script.src = 'https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js';
-          script.async = true;
-          script.onload = () => {
-            if (window.particlesJS) {
-              window.particlesJS.load('particles-js', '/particles.json', function() {
-                console.log('Particles.js config loaded from CDN');
-              });
-            }
-          };
-          document.body.appendChild(script);
-        } else {
-          window.particlesJS.load('particles-js', '/particles.json', function() {
-            console.log('Particles.js config loaded');
-          });
-        }
-      }
-    };
-
-    loadParticles();
-
-    // Cleanup function
-    return () => {
-      const particlesContainer = document.getElementById('particles-js');
-      if (particlesContainer) {
-        particlesContainer.innerHTML = '';
-      }
-    };
+    initParticlesEngine(async (engine) => {
+      await loadFull(engine);
+    });
   }, []);
 
   return (
     <div
-      id="particles-js"
       style={{
         position: 'fixed',
-        width: '100%',
-        height: '100%',
+        width: '100vw',
+        height: '100vh',
         top: 0,
         left: 0,
         zIndex: 0,
-        pointerEvents: 'none'
+        pointerEvents: 'auto',
       }}
-    ></div>
+    >
+      <Particles
+        id="tsparticles"
+        options={particlesOptions}
+      />
+    </div>
   );
 };
 
