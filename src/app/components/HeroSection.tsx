@@ -1,22 +1,23 @@
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
+      staggerChildren: 0.1,
+      delayChildren: 0,
     },
   },
 };
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.4,
       ease: 'easeOut' as const,
     },
   },
@@ -38,17 +39,7 @@ export default function HeroSection() {
       </motion.p>
       <motion.h2
         variants={itemVariants}
-        className="mb-12 text-6xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-7xl md:text-8xl"
-        style={{
-          textShadow:
-            '-10px 0 6px rgba(0, 191, 255, 0.4), -12px 0 12px rgba(0, 150, 255, 0.35), -15px 0 18px rgba(0, 100, 255, 0.3), -18px 0 24px rgba(0, 150, 255, 0.25), ' +
-            '0 0 6px rgba(138, 43, 226, 0.3), 0 0 12px rgba(148, 0, 211, 0.25), 0 0 18px rgba(138, 43, 226, 0.2), 0 0 24px rgba(148, 0, 211, 0.15), ' +
-            '10px 0 6px rgba(255, 20, 147, 0.4), 12px 0 12px rgba(255, 0, 150, 0.35), 15px 0 18px rgba(255, 20, 147, 0.3), 18px 0 24px rgba(255, 0, 150, 0.25), 20px 0 30px rgba(255, 20, 147, 0.2)',
-          filter:
-            'drop-shadow(-10px 0 10px rgba(0, 191, 255, 0.3)) drop-shadow(-12px 0 15px rgba(0, 150, 255, 0.25)) ' +
-            'drop-shadow(0 0 12px rgba(138, 43, 226, 0.2)) drop-shadow(0 0 18px rgba(148, 0, 211, 0.15)) ' +
-            'drop-shadow(10px 0 10px rgba(255, 20, 147, 0.3)) drop-shadow(12px 0 15px rgba(255, 0, 150, 0.25)) drop-shadow(15px 0 20px rgba(255, 20, 147, 0.2))',
-        }}
+        className="mb-12 text-6xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-7xl md:text-8xl hero-glow"
       >
         Spandan Patel
       </motion.h2>
@@ -66,7 +57,14 @@ export default function HeroSection() {
           computer science
         </span> major at
         <br />
-        <img src="/UCLA-square-logo.jpg" alt="UCLA Logo" className="mt-4 h-20 w-auto rounded-xl shadow-lg mx-auto" />
+        <Image
+          src="/UCLA-square-logo.jpg"
+          alt="UCLA Logo"
+          width={80}
+          height={80}
+          className="mt-4 rounded-xl shadow-lg mx-auto"
+          priority
+        />
       </motion.p>
     </motion.section>
   );
