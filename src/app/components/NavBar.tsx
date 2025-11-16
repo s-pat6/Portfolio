@@ -55,12 +55,19 @@ export default function NavBar() {
           if (totalHighlightedChars > charsBeforeThisLink) {
             coloredCount = Math.min(charsInThisLink, totalHighlightedChars - charsBeforeThisLink);
           }
+          const handleClick = () => {
+            const element = document.getElementById(id);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          };
+
           return (
-            <a
+            <button
               key={id}
-              href={`#${id}`}
+              onClick={handleClick}
               className={
-                `relative px-3 py-1 font-medium text-lg transition-all duration-300 text-zinc-600 dark:text-zinc-400 hover:text-pink-600 dark:hover:text-pink-300`
+                `relative px-3 py-1 font-medium text-lg transition-all duration-300 text-zinc-600 dark:text-zinc-400 hover:text-pink-600 dark:hover:text-pink-300 cursor-pointer bg-transparent border-none`
               }
               style={{
                 borderRadius: '0.75rem',
@@ -85,7 +92,7 @@ export default function NavBar() {
                   </span>
                 );
               })}
-            </a>
+            </button>
           );
         })}
       </div>
