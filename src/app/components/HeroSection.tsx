@@ -29,7 +29,7 @@ export default function HeroSection() {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="flex min-h-screen snap-start flex-col items-center justify-center text-center"
+      className="flex min-h-screen snap-start flex-col items-center justify-center text-center pt-[80px]"
     >
       <motion.p
         variants={itemVariants}

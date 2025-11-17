@@ -67,11 +67,10 @@ export default function NavBar() {
               key={id}
               onClick={handleClick}
               className={
-                `relative px-3 py-1 font-medium text-lg transition-all duration-300 text-zinc-600 dark:text-zinc-400 hover:text-pink-600 dark:hover:text-pink-300 cursor-pointer bg-transparent border-none`
+                `relative px-3 py-1 font-medium text-lg transition-all duration-300 text-zinc-600 dark:text-zinc-400 hover:text-pink-600 dark:hover:text-pink-300 cursor-pointer bg-white/5 dark:bg-white/[0.02] rounded-lg backdrop-blur-md`
               }
               style={{
-                borderRadius: '0.75rem',
-                transition: 'color 0.3s',
+                transition: 'color 0.3s, background-color 0.3s',
               }}
             >
               {label.split('').map((char, idx) => {
@@ -104,8 +103,7 @@ export default function NavBar() {
       <div className="w-full px-[25vw] py-4 flex items-center justify-between">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="px-5 py-2 font-bold text-2xl text-zinc-900 dark:text-zinc-50 bg-transparent border-none shadow-none backdrop-blur-none hover:text-pink-600 dark:hover:text-pink-300 focus:outline-none"
-          style={{ background: 'transparent', boxShadow: 'none', border: 'none' }}
+          className="px-5 py-2 font-bold text-2xl text-zinc-900 dark:text-zinc-50 bg-white/5 dark:bg-white/[0.02] rounded-lg backdrop-blur-md hover:text-pink-600 dark:hover:text-pink-300 focus:outline-none transition-all duration-300"
           aria-label="Scroll to top"
         >
           Spandan Patel

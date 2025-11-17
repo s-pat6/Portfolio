@@ -71,7 +71,7 @@ export default function ProjectsSection() {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}
-      className="flex min-h-screen snap-start flex-col items-center justify-center px-6 py-24 scroll-mt-20"
+      className="flex min-h-screen snap-start flex-col items-center justify-center px-6 py-24 pt-[80px] scroll-mt-20"
     >
       <motion.div variants={itemVariants} className="mx-auto w-full max-w-6xl">
         <motion.h2

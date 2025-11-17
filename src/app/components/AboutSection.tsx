@@ -16,9 +16,7 @@ import {
   FaDatabase,
   FaAws,
   FaTerminal,
-  FaEye,
 } from 'react-icons/fa';
-import { TbBrandCSharp } from 'react-icons/tb';
 import { IconType } from 'react-icons';
 
 const containerVariants = {
@@ -49,6 +47,11 @@ interface Skill {
   color: string;
 }
 
+interface Interest {
+  name: string;
+  emoji: string;
+}
+
 const skills: Skill[] = [
   { name: 'C++', icon: SiCplusplus, color: '#00599C' },
   { name: 'Python', icon: SiPython, color: '#3776AB' },
@@ -56,7 +59,6 @@ const skills: Skill[] = [
   { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
   { name: 'Java', icon: FaJava, color: '#007396' },
   { name: 'SQL', icon: FaDatabase, color: '#4479A1' },
-  { name: 'C#', icon: TbBrandCSharp, color: '#239120' },
   { name: 'Bash', icon: FaTerminal, color: '#4EAA25' },
   { name: 'React', icon: SiReact, color: '#61DAFB' },
   { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
@@ -65,8 +67,72 @@ const skills: Skill[] = [
   { name: 'Docker', icon: SiDocker, color: '#2496ED' },
   { name: 'AWS', icon: FaAws, color: '#FF9900' },
   { name: 'PyTorch', icon: SiPytorch, color: '#EE4C2C' },
-  { name: 'OpenCV', icon: FaEye, color: '#5C3EE8' },
 ];
+
+const interests: Interest[] = [
+  { name: 'Basketball', emoji: '🏀' },
+  { name: 'Music', emoji: '🎵' },
+  { name: 'Poker', emoji: '🃏' },
+  { name: 'Chess', emoji: '♟️' },
+  { name: 'Video Games', emoji: '🎮' },
+  { name: 'Geography/Culture', emoji: '🌍' },
+  { name: 'Gym', emoji: '💪' },
+];
+
+interface SkillBubbleProps {
+  skill: Skill;
+  idx: number;
+  position: 'left' | 'right';
+}
+
+function SkillBubble({ skill, idx, position }: SkillBubbleProps) {
+  const size = 70;
+  const staggerRotation = Math.sin(idx * 1.5 + (position === 'right' ? 1 : 0)) * 8;
+
+  return (
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, scale: 0, rotate: staggerRotation },
+        visible: {
+          opacity: 1,
+          scale: 1,
+          rotate: staggerRotation,
+          transition: {
+            duration: 0.5,
+            delay: idx * 0.08,
+            ease: [0.34, 1.56, 0.64, 1],
+          },
+        },
+      }}
+      whileHover={{ scale: 1.15, rotate: staggerRotation + 5 }}
+      className="group relative flex justify-center z-40"
+    >
+      <div
+        className="flex h-full w-full items-center justify-center rounded-full border border-white/30 bg-white/20 shadow-xl backdrop-blur-xl transition-all dark:border-zinc-700/30 dark:bg-zinc-800/20"
+        style={{
+          width: `${size}px`,
+          height: `${size}px`,
+          boxShadow: `0 8px 32px ${skill.color}30, 0 0 24px ${skill.color}15, inset 0 1px 1px rgba(255,255,255,0.2)`,
+        }}
+      >
+        <skill.icon
+          className="transition-all group-hover:scale-110"
+          style={{
+            width: `${size * 0.55}px`,
+            height: `${size * 0.55}px`,
+            color: skill.color,
+            filter: `drop-shadow(0 0 8px ${skill.color}80)`,
+          }}
+        />
+      </div>
+        <div
+          className="absolute z-[9999] right-full mr-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap rounded-lg bg-zinc-900/90 px-2 py-1 text-xs font-medium text-white dark:bg-white/90 dark:text-zinc-900"
+        >
+        {skill.name}
+      </div>
+    </motion.div>
+  );
+}
 
 export default function AboutSection() {
   return (
@@ -76,15 +142,15 @@ export default function AboutSection() {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       variants={containerVariants}
-      className="flex min-h-screen snap-start flex-col items-center justify-center px-6 py-24 scroll-mt-20"
+      className="flex h-screen snap-start flex-col items-center justify-center px-6 py-8 scroll-mt-0"
     >
       <motion.div
         variants={itemVariants}
-        className="mx-auto w-full max-w-6xl"
+        className="mx-auto w-full max-w-5xl"
       >
         <motion.h2
           variants={itemVariants}
-          className="mb-12 text-center text-4xl font-bold text-zinc-900 dark:text-zinc-50 sm:text-5xl"
+          className="mb-8 text-center text-4xl font-bold text-zinc-900 dark:text-zinc-50"
           style={{
             textShadow: '0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3)',
           }}
@@ -92,167 +158,121 @@ export default function AboutSection() {
           About Me
         </motion.h2>
 
-        {/* Grid layout: left bubbles | text | right bubbles */}
-        <div className="grid grid-cols-[300px_auto_300px] gap-12 items-start py-20">
-          {/* Left Bubbles Column */}
-          <div className="relative h-full">
-            <div className="relative w-full min-h-[600px] flex flex-col justify-around py-8">
-              {skills.filter((_, i) => i % 2 === 0).map((skill, idx) => {
-                const index = idx * 2; // Original index for consistent positioning
-                // Staggered layout: alternating left/right within the column
-                const stagger = idx % 2 === 0 ? 30 : 70; // Alternate between left (30%) and right (70%) of column
-                const verticalSpacing = (100 / 8) * idx + 10; // Evenly distributed vertically
-                const offsetX = (Math.sin(index * 2.5) * 15); // Small horizontal variation
-                const offsetY = (Math.cos(index * 3.7) * 8); // Small vertical variation
-                const rotation = Math.sin(index * 3.14159) * 12;
-                const randomDelay = idx * 0.08;
-                const size = 70 + (idx % 3) * 6; // Size varies in pattern: 70, 76, 82
+        {/* Main grid: left skills, center content, right skills */}
+        <div className="grid grid-cols-[auto_1fr_auto] gap-8 items-center justify-items-center">
+          {/* Center: About Text + Interests - Rendered first so bubbles can layer on top */}
+          <div className="flex flex-col items-center gap-6 order-2">
+            {/* About Text */}
+            <motion.div
+              variants={itemVariants}
+              className="relative z-20 rounded-3xl border-2 border-blue-200/50 bg-gradient-to-br from-blue-50/95 via-white/95 to-indigo-50/95 p-8 shadow-2xl backdrop-blur-md dark:border-blue-800/50 dark:from-blue-950/95 dark:via-zinc-900/95 dark:to-indigo-950/95 w-full"
+              style={{
+                boxShadow: '0 20px 60px rgba(59, 130, 246, 0.2), 0 0 40px rgba(99, 102, 241, 0.1)',
+              }}
+            >
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-400/10 via-transparent to-indigo-400/10 dark:from-blue-500/10 dark:to-indigo-500/10"></div>
+              <div className="relative z-10">
+                <p className="text-lg leading-8 text-zinc-700 dark:text-zinc-300">
+                  I'm a <span className="font-semibold text-blue-600 dark:text-blue-400">Computer Science student at UCLA </span>
+                  exploring my interests within software development, particularly in the fields of <span className="font-semibold">fullstack development</span> and
+                  <span className="font-semibold"> distributed systems</span>.
+                  I've previously interned at <span className="font-semibold text-purple-600 dark:text-purple-400">TikHub</span> and
+                  <span className="font-semibold text-purple-600 dark:text-purple-400"> Scale AI</span>.
+                  My campus activities include organizing <span className="font-semibold">LA Hacks</span> on the tech team, being a
+                  <span className="font-semibold"> Dev Team Officer for ACM</span>, and an LLMs Researcher at the
+                  <span className="font-semibold"> Scalable Analytics Institute Lab</span>.
+                </p>
+              </div>
+            </motion.div>
 
-                return (
+            {/* Interests Section */}
+            <motion.div
+              variants={itemVariants}
+              className="w-full"
+            >
+              <h3 className="mb-4 text-center text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+                Interests
+              </h3>
+              <div className="flex flex-wrap justify-center gap-3">
+                {interests.map((interest, idx) => (
                   <motion.div
-                    key={skill.name}
+                    key={interest.name}
                     variants={{
-                      hidden: { opacity: 0, scale: 0, rotate: rotation },
+                      hidden: { opacity: 0, scale: 0, y: 10 },
                       visible: {
                         opacity: 1,
                         scale: 1,
-                        rotate: rotation,
+                        y: 0,
                         transition: {
-                          duration: 0.6,
-                          delay: randomDelay,
-                          ease: [0.34, 1.56, 0.64, 1],
+                          duration: 0.4,
+                          delay: idx * 0.06,
+                          ease: 'easeOut',
                         },
                       },
                     }}
-                    whileHover={{ scale: 1.2, y: -8, rotate: rotation + 5 }}
-                    className="absolute pointer-events-auto group"
-                    style={{
-                      left: `calc(${stagger}% + ${offsetX}px)`,
-                      top: `calc(${verticalSpacing}% + ${offsetY}px)`,
-                      transform: 'translate(-50%, -50%)',
-                      width: `${size}px`,
-                      height: `${size}px`,
-                    }}
+                    whileHover={{ scale: 1.1, y: -4 }}
+                    className="group"
                   >
                     <div
-                      className="flex h-full w-full items-center justify-center rounded-full border border-white/30 bg-white/20 shadow-2xl backdrop-blur-xl transition-all dark:border-zinc-700/30 dark:bg-zinc-800/20"
+                      className="flex items-center gap-2 rounded-full border border-white/30 bg-white/20 px-4 py-2 shadow-lg backdrop-blur-xl transition-all hover:shadow-xl dark:border-zinc-700/30 dark:bg-zinc-800/20"
                       style={{
-                        boxShadow: `0 8px 32px ${skill.color}30, 0 0 24px ${skill.color}15, inset 0 1px 1px rgba(255,255,255,0.2)`,
+                        boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15), inset 0 1px 1px rgba(255,255,255,0.2)',
                       }}
                     >
-                      <skill.icon
-                        className="transition-all group-hover:scale-110"
-                        style={{
-                          width: `${size * 0.55}px`,
-                          height: `${size * 0.55}px`,
-                          color: skill.color,
-                          filter: `drop-shadow(0 0 8px ${skill.color}80) drop-shadow(0 0 4px ${skill.color})`,
-                        }}
-                      />
-                    </div>
-                    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-zinc-900/90 px-3 py-1 text-xs font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 dark:bg-white/90 dark:text-zinc-900">
-                      {skill.name}
+                      <span className="text-lg">{interest.emoji}</span>
+                      <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                        {interest.name}
+                      </span>
                     </div>
                   </motion.div>
-                );
-              })}
-            </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
 
-          {/* Central About Text */}
-          <motion.div
-            variants={itemVariants}
-            className="relative z-20 rounded-3xl border-2 border-blue-200/50 bg-gradient-to-br from-blue-50/95 via-white/95 to-indigo-50/95 p-10 shadow-2xl backdrop-blur-md dark:border-blue-800/50 dark:from-blue-950/95 dark:via-zinc-900/95 dark:to-indigo-950/95 max-w-3xl mx-auto"
-            style={{
-              boxShadow: '0 20px 60px rgba(59, 130, 246, 0.2), 0 0 40px rgba(99, 102, 241, 0.1)',
-            }}
-          >
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-400/10 via-transparent to-indigo-400/10 dark:from-blue-500/10 dark:to-indigo-500/10"></div>
-            <div className="relative z-10">
-              <p className="mb-4 text-lg leading-8 text-zinc-700 dark:text-zinc-300">
-                I'm a <span className="font-semibold text-blue-600 dark:text-blue-400">Computer Science student at UCLA</span>,
-                passionate about leveraging technology to solve complex problems. I am a <span className="font-semibold">USACO Gold competitor</span> and
-                <span className="font-semibold"> 3x Hackathon Winner</span> (HackUTD, HackSMU, AIFAHacks).
-              </p>
-              <p className="mb-4 text-lg leading-8 text-zinc-700 dark:text-zinc-300">
-                My journey in software engineering includes internships at <span className="font-semibold text-purple-600 dark:text-purple-400">TikHub</span>,
-                <span className="font-semibold text-purple-600 dark:text-purple-400"> Scale AI</span>, and
-                <span className="font-semibold text-purple-600 dark:text-purple-400"> UT Austin Swarm Nanorobotics Lab</span>,
-                where I've worked on everything from real-time analytics and LLM optimization to computer vision and pathfinding algorithms.
-              </p>
-              <p className="text-lg leading-8 text-zinc-700 dark:text-zinc-300">
-                On campus, I serve as <span className="font-semibold">Technology Coordinator for LA Hacks</span>,
-                <span className="font-semibold"> Dev Team Officer for ACM</span>, and
-                <span className="font-semibold"> LLMs Researcher at ScAI Lab</span>, where I contribute to cutting-edge research and help build
-                the next generation of developers.
-              </p>
+          {/* Left Skill Bubbles - 2-3-2 Layout */}
+          <motion.div className="flex flex-col gap-6 order-1">
+            {/* Row 1: 2 bubbles */}
+            <div className="flex gap-4 justify-center">
+              {skills.filter((_, i) => i % 2 === 0).slice(0, 2).map((skill, idx) => (
+                <SkillBubble key={skill.name} skill={skill} idx={idx} position="left" />
+              ))}
+            </div>
+            {/* Row 2: 3 bubbles */}
+            <div className="flex gap-4 justify-center">
+              {skills.filter((_, i) => i % 2 === 0).slice(2, 5).map((skill, idx) => (
+                <SkillBubble key={skill.name} skill={skill} idx={idx + 2} position="left" />
+              ))}
+            </div>
+            {/* Row 3: 2 bubbles */}
+            <div className="flex gap-4 justify-center">
+              {skills.filter((_, i) => i % 2 === 0).slice(5, 7).map((skill, idx) => (
+                <SkillBubble key={skill.name} skill={skill} idx={idx + 5} position="left" />
+              ))}
             </div>
           </motion.div>
 
-          {/* Right Bubbles Column */}
-          <div className="relative h-full">
-            <div className="relative w-full min-h-[600px] flex flex-col justify-around py-8">
-              {skills.filter((_, i) => i % 2 === 1).map((skill, idx) => {
-                const index = idx * 2 + 1; // Original index for consistent positioning
-                // Staggered layout: alternating right/left within the column (opposite of left column)
-                const stagger = idx % 2 === 0 ? 70 : 30; // Alternate between right (70%) and left (30%) of column
-                const verticalSpacing = (100 / 8) * idx + 10; // Evenly distributed vertically
-                const offsetX = (Math.sin(index * 2.5) * 15); // Small horizontal variation
-                const offsetY = (Math.cos(index * 3.7) * 8); // Small vertical variation
-                const rotation = Math.sin(index * 3.14159) * 12;
-                const randomDelay = idx * 0.08;
-                const size = 70 + (idx % 3) * 6; // Size varies in pattern: 70, 76, 82
-
-                return (
-                  <motion.div
-                    key={skill.name}
-                    variants={{
-                      hidden: { opacity: 0, scale: 0, rotate: rotation },
-                      visible: {
-                        opacity: 1,
-                        scale: 1,
-                        rotate: rotation,
-                        transition: {
-                          duration: 0.6,
-                          delay: randomDelay,
-                          ease: [0.34, 1.56, 0.64, 1],
-                        },
-                      },
-                    }}
-                    whileHover={{ scale: 1.25, y: -10, rotate: rotation + 5 }}
-                    className="absolute pointer-events-auto group"
-                    style={{
-                      left: `calc(${stagger}% + ${offsetX}px)`,
-                      top: `calc(${verticalSpacing}% + ${offsetY}px)`,
-                      transform: 'translate(-50%, -50%)',
-                      width: `${size}px`,
-                      height: `${size}px`,
-                    }}
-                  >
-                    <div
-                      className="flex h-full w-full items-center justify-center rounded-full border border-white/30 bg-white/20 shadow-2xl backdrop-blur-xl transition-all dark:border-zinc-700/30 dark:bg-zinc-800/20"
-                      style={{
-                        boxShadow: `0 8px 32px ${skill.color}30, 0 0 24px ${skill.color}15, inset 0 1px 1px rgba(255,255,255,0.2)`,
-                      }}
-                    >
-                      <skill.icon
-                        className="transition-all group-hover:scale-110"
-                        style={{
-                          width: `${size * 0.55}px`,
-                          height: `${size * 0.55}px`,
-                          color: skill.color,
-                          filter: `drop-shadow(0 0 8px ${skill.color}80) drop-shadow(0 0 4px ${skill.color})`,
-                        }}
-                      />
-                    </div>
-                    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-zinc-900/90 px-3 py-1 text-xs font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 dark:bg-white/90 dark:text-zinc-900">
-                      {skill.name}
-                    </div>
-                  </motion.div>
-                );
-              })}
+          {/* Right Skill Bubbles - 2-3-2 Layout */}
+          <motion.div className="flex flex-col gap-6 order-3">
+            {/* Row 1: 2 bubbles */}
+            <div className="flex gap-4 justify-center">
+              {skills.filter((_, i) => i % 2 === 1).slice(0, 2).map((skill, idx) => (
+                <SkillBubble key={skill.name} skill={skill} idx={idx} position="right" />
+              ))}
             </div>
-          </div>
+            {/* Row 2: 3 bubbles */}
+            <div className="flex gap-4 justify-center">
+              {skills.filter((_, i) => i % 2 === 1).slice(2, 5).map((skill, idx) => (
+                <SkillBubble key={skill.name} skill={skill} idx={idx + 2} position="right" />
+              ))}
+            </div>
+            {/* Row 3: 2 bubbles */}
+            <div className="flex gap-4 justify-center">
+              {skills.filter((_, i) => i % 2 === 1).slice(5, 7).map((skill, idx) => (
+                <SkillBubble key={skill.name} skill={skill} idx={idx + 5} position="right" />
+              ))}
+            </div>
+          </motion.div>
         </div>
       </motion.div>
     </motion.section>

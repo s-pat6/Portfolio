@@ -119,19 +119,24 @@ export default function Home() {
         )}
       </button>
 
-      <div className={`relative z-10 transition-opacity duration-500 ${showUI ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+      <div className={`relative z-10 transition-opacity duration-500 flex flex-col min-h-screen ${showUI ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
         {/* Navigation */}
         <NavBar />
-        {/* Hero Section */}
-        <HeroSection />
-        {/* About Me Section */}
-        <AboutSection />
-        {/* Experience Section */}
-        <ExperienceSection />
-        {/* Projects Section */}
-        <ProjectsSection />
-        {/* Footer */}
-        <MainFooter />
+
+        {/* Main content area */}
+        <div className="flex-1 flex flex-col">
+          {/* Hero Section */}
+          <HeroSection />
+          {/* About Me Section */}
+          <AboutSection />
+          {/* Experience Section */}
+          <ExperienceSection />
+          {/* Projects Section */}
+          <ProjectsSection />
+          {/* Footer */}
+          <MainFooter />
+        </div>
+
         {/* Floating Glassy Footer */}
         <FloatingFooter />
       </div>
