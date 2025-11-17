@@ -5,7 +5,7 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.15,
       delayChildren: 0.1,
     },
   },
@@ -16,11 +16,52 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.5,
       ease: 'easeOut' as const,
     },
   },
 };
+
+const projects = [
+  {
+    name: 'Emotion-Aware AI Assistant',
+    icon: '🤖',
+    description: 'AI-powered communication assistant that analyzes facial expressions in real-time to provide emotionally intelligent responses. Built with facial recognition technology and advanced language models.',
+    highlights: [
+      'Real-time facial expression recognition using DeepFace and OpenCV',
+      'Context-aware responses powered by Llama 3 via Groq API',
+      'Natural text-to-speech integration with Deepgram',
+    ],
+    tags: ['Python', 'DeepFace', 'OpenCV', 'Llama 3', 'Groq', 'Deepgram'],
+    award: 'Winner - AIFAHacks 2024',
+  },
+  {
+    name: 'Safer Story',
+    icon: '🛡️',
+    description: 'Safety-first navigation app that generates walking routes with maximum streetlight coverage, prioritizing user security in urban environments.',
+    highlights: [
+      'Generates safe walking paths with 90%+ streetlight coverage',
+      'Real-time route optimization using Google Maps API',
+      'Cross-platform mobile app built with React Native',
+      'MongoDB backend for storing location and safety data',
+    ],
+    tags: ['React Native', 'Node.js', 'Google Maps API', 'MongoDB', 'REST API'],
+    award: 'Winner - HackSMU 2024',
+  },
+  {
+    name: 'Citadel Summer Terminal',
+    icon: '🎮',
+    description: 'Competitive tower defense AI that achieved 4th place in ELO ranking through adaptive strategy and dynamic resource optimization.',
+    highlights: [
+      'Achieved 4th place ELO ranking in international competition',
+      'Adaptive Python algorithm that learns from opponent patterns',
+      'Dynamic caching system for real-time strategy optimization',
+      'Advanced pathfinding and resource management',
+    ],
+    tags: ['Python', 'Algorithms', 'AI Strategy', 'Dynamic Programming'],
+    award: '4th Place ELO - Citadel Terminal',
+  },
+];
 
 export default function ProjectsSection() {
   return (
@@ -28,7 +69,7 @@ export default function ProjectsSection() {
       id="projects"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}
       className="flex min-h-screen snap-start flex-col items-center justify-center px-6 py-24 scroll-mt-20"
     >
@@ -38,197 +79,78 @@ export default function ProjectsSection() {
           className="mb-12 text-center text-4xl font-bold text-zinc-900 dark:text-zinc-50 sm:text-5xl"
           style={{
             textShadow: '0 0 20px rgba(236, 72, 153, 0.5), 0 0 40px rgba(236, 72, 153, 0.3)',
-            filter: 'drop-shadow(0 0 10px rgba(236, 72, 153, 0.4))',
           }}
         >
           Projects
         </motion.h2>
+
         <motion.div
           variants={containerVariants}
-          className="grid gap-6 md:grid-cols-2"
+          className="space-y-8"
         >
-          {/* Project 1 */}
-          <motion.div
-            variants={itemVariants}
-            whileHover={{ scale: 1.03, y: -8 }}
-            className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-lg transition-all dark:border-zinc-800 dark:bg-zinc-900"
-          >
-            <div className="mb-4 flex items-start justify-between">
-              <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
-                Project Name
-              </h3>
-              <div className="flex gap-2">
-                <a
-                  href="#"
-                  className="text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-                  aria-label="GitHub"
-                >
-                  <svg
-                    className="h-5 w-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.594 1.028 2.687 0 3.847-2.338 4.695-4.566 4.944.359.309.678.919.678 1.852 0 1.336-.012 2.417-.012 2.747 0 .268.18.579.688.481C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z" />
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  className="text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-                  aria-label="Live Demo"
-                >
-                  <svg
-                    className="h-5 w-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <p className="mb-4 text-zinc-700 dark:text-zinc-300">
-              A brief description of your project, the problem it solves, and the technologies you used
-              to build it.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {['React', 'TypeScript', 'Tailwind'].map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </motion.div>
+          {projects.map((project) => (
+            <motion.div
+              key={project.name}
+              variants={itemVariants}
+              whileHover={{ scale: 1.02, x: 10 }}
+              className="group relative rounded-3xl border-2 border-pink-200/50 bg-gradient-to-br from-pink-50/90 via-white to-fuchsia-50/90 p-8 shadow-2xl backdrop-blur-sm dark:border-pink-800/50 dark:from-pink-950/90 dark:via-zinc-900 dark:to-fuchsia-950/90 transition-all"
+              style={{
+                boxShadow:
+                  '0 12px 50px rgba(236, 72, 153, 0.18), 0 0 40px rgba(236, 72, 153, 0.1)',
+              }}
+            >
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-pink-400/5 via-transparent to-fuchsia-400/5 dark:from-pink-500/5 dark:to-fuchsia-500/5 group-hover:from-pink-400/10 group-hover:to-fuchsia-400/10 transition-all"></div>
 
-          {/* Project 2 */}
-          <motion.div
-            variants={itemVariants}
-            whileHover={{ scale: 1.03, y: -8 }}
-            className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-lg transition-all dark:border-zinc-800 dark:bg-zinc-900"
-          >
-            <div className="mb-4 flex items-start justify-between">
-              <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
-                Another Project
-              </h3>
-              <div className="flex gap-2">
-                <a
-                  href="#"
-                  className="text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-                  aria-label="GitHub"
-                >
-                  <svg
-                    className="h-5 w-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.594 1.028 2.687 0 3.847-2.338 4.695-4.566 4.944.359.309.678.919.678 1.852 0 1.336-.012 2.417-.012 2.747 0 .268.18.579.688.481C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z" />
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  className="text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-                  aria-label="Live Demo"
-                >
-                  <svg
-                    className="h-5 w-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <p className="mb-4 text-zinc-700 dark:text-zinc-300">
-              Description of another project showcasing different skills or technologies. Explain what
-              makes this project unique or interesting.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {['Python', 'Flask', 'PostgreSQL'].map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </motion.div>
+              <div className="relative z-10">
+                <div className="mb-6 flex items-start justify-between flex-wrap gap-4">
+                  <div className="flex items-center gap-4">
+                    <span className="text-5xl">{project.icon}</span>
+                    <div>
+                      <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 mb-1">
+                        {project.name}
+                      </h3>
+                      {project.award && (
+                        <div className="flex items-center gap-2">
+                          <span className="text-xl">🏆</span>
+                          <span className="text-sm font-semibold text-pink-600 dark:text-pink-400">
+                            {project.award}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
 
-          {/* Project 3 */}
-          <motion.div
-            variants={itemVariants}
-            whileHover={{ scale: 1.03, y: -8 }}
-            className="group rounded-2xl border border-zinc-200 bg-white p-8 shadow-lg transition-all dark:border-zinc-800 dark:bg-zinc-900 md:col-span-2"
-          >
-            <div className="mb-4 flex items-start justify-between">
-              <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
-                Third Project
-              </h3>
-              <div className="flex gap-2">
-                <a
-                  href="#"
-                  className="text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-                  aria-label="GitHub"
-                >
-                  <svg
-                    className="h-5 w-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.594 1.028 2.687 0 3.847-2.338 4.695-4.566 4.944.359.309.678.919.678 1.852 0 1.336-.012 2.417-.012 2.747 0 .268.18.579.688.481C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z" />
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  className="text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"
-                  aria-label="Live Demo"
-                >
-                  <svg
-                    className="h-5 w-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>
+                <p className="mb-4 text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                  {project.description}
+                </p>
+
+                <ul className="mb-6 space-y-2">
+                  {project.highlights.map((highlight, i) => (
+                    <li
+                      key={i}
+                      className="flex gap-3 text-zinc-700 dark:text-zinc-300"
+                    >
+                      <span className="text-pink-500 mt-1">▹</span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <motion.span
+                      key={tag}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      className="rounded-lg bg-pink-100/80 px-3 py-1.5 text-xs font-medium text-pink-700 backdrop-blur-sm dark:bg-pink-900/30 dark:text-pink-300"
+                    >
+                      {tag}
+                    </motion.span>
+                  ))}
+                </div>
               </div>
-            </div>
-            <p className="mb-4 text-zinc-700 dark:text-zinc-300">
-              Another project that demonstrates your versatility and range of skills. Include details
-              about challenges faced and how you overcame them.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {['Java', 'Spring Boot', 'MySQL'].map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </motion.div>
       </motion.div>
     </motion.section>
