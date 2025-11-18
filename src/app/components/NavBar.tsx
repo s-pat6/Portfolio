@@ -1,9 +1,38 @@
+'use client';
+
 import { useMotionValue } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { MdDarkMode, MdLightMode } from 'react-icons/md';
 
 const SECTION_IDS = ['about', 'experience', 'projects'];
 
 export default function NavBar() {
+  const [isDark, setIsDark] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Check initial theme from localStorage, default to dark mode
+    setMounted(true);
+    const isDarkMode = localStorage.getItem('darkMode') !== 'false';
+    setIsDark(isDarkMode);
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
+    localStorage.setItem('darkMode', String(newIsDark));
+    if (newIsDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
+
   function NavLinks() {
     const scrollY = useMotionValue(0);
     const [currentScrollY, setCurrentScrollY] = useState(0);
@@ -67,7 +96,7 @@ export default function NavBar() {
               key={id}
               onClick={handleClick}
               className={
-                `relative px-3 py-1 font-medium text-lg transition-all duration-300 text-zinc-600 dark:text-zinc-400 hover:text-pink-600 dark:hover:text-pink-300 cursor-pointer bg-white/5 dark:bg-white/[0.02] rounded-lg backdrop-blur-md`
+                `relative px-3 py-1 font-medium text-lg transition-all duration-300 text-zinc-800 dark:text-zinc-400 hover:text-pink-700 dark:hover:text-pink-300 cursor-pointer bg-transparent dark:bg-white/[0.02] rounded-lg backdrop-blur-md`
               }
               style={{
                 transition: 'color 0.3s, background-color 0.3s',
@@ -103,12 +132,21 @@ export default function NavBar() {
       <div className="w-full px-[25vw] py-4 flex items-center justify-between">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="px-5 py-2 font-bold text-2xl text-zinc-900 dark:text-zinc-50 bg-white/5 dark:bg-white/[0.02] rounded-lg backdrop-blur-md hover:text-pink-600 dark:hover:text-pink-300 focus:outline-none transition-all duration-300"
+          className="px-5 py-2 font-bold text-2xl text-zinc-900 dark:text-zinc-50 bg-transparent dark:bg-white/[0.02] rounded-lg backdrop-blur-md hover:text-pink-600 dark:hover:text-pink-300 focus:outline-none transition-all duration-300"
           aria-label="Scroll to top"
         >
           Spandan Patel
         </button>
         <NavLinks />
+        {mounted && (
+          <button
+            onClick={toggleTheme}
+            className="px-3 py-2 text-xl text-zinc-900 dark:text-zinc-50 bg-transparent dark:bg-white/[0.02] rounded-lg backdrop-blur-md hover:text-pink-600 dark:hover:text-pink-300 focus:outline-none transition-all duration-300"
+            aria-label="Toggle dark mode"
+          >
+            {isDark ? <MdDarkMode size={24} /> : <MdLightMode size={24} />}
+          </button>
+        )}
       </div>
     </nav>
   );

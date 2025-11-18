@@ -130,7 +130,7 @@ export default function ExperienceSection() {
                     key={index}
                     variants={itemVariants}
                     whileHover={{ scale: 1.02, x: 10 }}
-                    className="group relative rounded-2xl border-2 border-purple-200/50 bg-gradient-to-br from-purple-50/90 via-white to-violet-50/90 p-8 shadow-xl backdrop-blur-sm dark:border-purple-800/50 dark:from-purple-950/90 dark:via-zinc-900 dark:to-violet-950/90 transition-all"
+                    className="group relative rounded-2xl border-2 border-purple-200 bg-gradient-to-br from-purple-100/80 via-white to-violet-100/80 p-8 shadow-xl backdrop-blur-sm dark:border-purple-800/50 dark:from-purple-950/90 dark:via-zinc-900 dark:to-violet-950/90 transition-all"
                     style={{
                       boxShadow:
                         '0 10px 40px rgba(139, 92, 246, 0.15), 0 0 30px rgba(167, 139, 250, 0.08)',
@@ -141,14 +141,14 @@ export default function ExperienceSection() {
                     <div className="relative z-10">
                       <div className="mb-4 flex items-start justify-between flex-wrap gap-2">
                         <div>
-                          <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+                          <h3 className="text-2xl font-bold text-zinc-950 dark:text-zinc-50">
                             {exp.company}
                           </h3>
-                          <p className="text-lg font-semibold text-purple-600 dark:text-purple-400">
+                          <p className="text-lg font-semibold text-purple-700 dark:text-purple-400">
                             {exp.role}
                           </p>
                         </div>
-                        <span className="rounded-full bg-purple-100 px-4 py-1.5 text-sm font-medium text-purple-700 dark:bg-purple-900/40 dark:text-purple-300">
+                        <span className="rounded-full bg-purple-100 px-4 py-1.5 text-sm font-medium text-purple-800 dark:bg-purple-900/40 dark:text-purple-300">
                           {exp.period}
                         </span>
                       </div>
@@ -157,7 +157,7 @@ export default function ExperienceSection() {
                         {exp.description.map((item, i) => (
                           <li
                             key={i}
-                            className="flex gap-3 text-zinc-700 dark:text-zinc-300 leading-relaxed"
+                            className="flex gap-3 text-zinc-800 dark:text-zinc-300 leading-relaxed"
                           >
                             <span className="text-purple-500 mt-1.5">▹</span>
                             <span>{item}</span>
@@ -169,7 +169,7 @@ export default function ExperienceSection() {
                         {exp.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="rounded-lg bg-purple-100/80 px-3 py-1 text-xs font-medium text-purple-700 backdrop-blur-sm dark:bg-purple-900/30 dark:text-purple-300"
+                            className="rounded-lg bg-purple-100/80 px-3 py-1 text-xs font-medium text-purple-800 backdrop-blur-sm dark:bg-purple-900/30 dark:text-purple-300"
                           >
                             {tag}
                           </span>
@@ -195,7 +195,7 @@ export default function ExperienceSection() {
                     key={index}
                     variants={itemVariants}
                     whileHover={{ scale: 1.05, y: -8 }}
-                    className="group relative rounded-2xl border-2 border-blue-200/50 bg-gradient-to-br from-blue-50/90 via-white to-cyan-50/90 p-6 shadow-lg backdrop-blur-sm dark:border-blue-800/50 dark:from-blue-950/90 dark:via-zinc-900 dark:to-cyan-950/90 transition-all"
+                    className="group relative rounded-2xl border-2 border-blue-200 bg-gradient-to-br from-blue-100/80 via-white to-cyan-100/80 p-6 shadow-lg backdrop-blur-sm dark:border-blue-800/50 dark:from-blue-950/90 dark:via-zinc-900 dark:to-cyan-950/90 transition-all"
                     style={{
                       boxShadow:
                         '0 8px 30px rgba(59, 130, 246, 0.12), 0 0 20px rgba(99, 102, 241, 0.06)',
@@ -205,10 +205,10 @@ export default function ExperienceSection() {
 
                     <div className="relative z-10">
                       <div className="mb-3">
-                        <h4 className="text-xl font-bold text-zinc-900 dark:text-zinc-50 mb-1">
+                        <h4 className="text-xl font-bold text-zinc-950 dark:text-zinc-50 mb-1">
                           {exp.company}
                         </h4>
-                        <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                        <p className="text-sm font-semibold text-blue-700 dark:text-blue-400">
                           {exp.role}
                         </p>
                       </div>
@@ -217,7 +217,7 @@ export default function ExperienceSection() {
                         {exp.description.map((item, i) => (
                           <li
                             key={i}
-                            className="text-zinc-700 dark:text-zinc-300 leading-relaxed"
+                            className="text-zinc-800 dark:text-zinc-300 leading-relaxed"
                           >
                             {item}
                           </li>
@@ -228,7 +228,7 @@ export default function ExperienceSection() {
                         {exp.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="rounded-md bg-blue-100/80 px-2 py-0.5 text-xs font-medium text-blue-700 backdrop-blur-sm dark:bg-blue-900/30 dark:text-blue-300"
+                            className="rounded-md bg-blue-100/80 px-2 py-0.5 text-xs font-medium text-blue-800 backdrop-blur-sm dark:bg-blue-900/30 dark:text-blue-300"
                           >
                             {tag}
                           </span>

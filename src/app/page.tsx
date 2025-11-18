@@ -98,13 +98,13 @@ export default function Home() {
   const [showUI, setShowUI] = useState(true);
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-zinc-50 via-white to-zinc-100 dark:from-zinc-950 dark:via-black dark:to-zinc-900">
+    <div className="relative min-h-screen bg-white dark:from-zinc-950 dark:via-black dark:to-zinc-900 dark:bg-gradient-to-br">
       <ParticlesBackground />
 
       {/* UI Toggle Button */}
       <button
         onClick={() => setShowUI(!showUI)}
-        className="fixed top-6 left-6 z-[100] p-3 rounded-full bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-white/10 hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300 shadow-lg"
+        className="fixed top-6 left-6 z-[100] p-3 rounded-full bg-zinc-300/40 dark:bg-black/10 backdrop-blur-md border border-zinc-400/60 dark:border-white/10 hover:bg-zinc-300/60 dark:hover:bg-black/20 transition-all duration-300 shadow-lg"
         aria-label={showUI ? "Hide UI" : "Show UI"}
       >
         {showUI ? (

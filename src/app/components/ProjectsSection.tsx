@@ -93,7 +93,7 @@ export default function ProjectsSection() {
               key={project.name}
               variants={itemVariants}
               whileHover={{ scale: 1.02, x: 10 }}
-              className="group relative rounded-3xl border-2 border-pink-200/50 bg-gradient-to-br from-pink-50/90 via-white to-fuchsia-50/90 p-8 shadow-2xl backdrop-blur-sm dark:border-pink-800/50 dark:from-pink-950/90 dark:via-zinc-900 dark:to-fuchsia-950/90 transition-all"
+              className="group relative rounded-3xl border-2 border-pink-200 bg-gradient-to-br from-pink-100/80 via-white to-fuchsia-100/80 p-8 shadow-2xl backdrop-blur-sm dark:border-pink-800/50 dark:from-pink-950/90 dark:via-zinc-900 dark:to-fuchsia-950/90 transition-all"
               style={{
                 boxShadow:
                   '0 12px 50px rgba(236, 72, 153, 0.18), 0 0 40px rgba(236, 72, 153, 0.1)',
@@ -106,13 +106,13 @@ export default function ProjectsSection() {
                   <div className="flex items-center gap-4">
                     <span className="text-5xl">{project.icon}</span>
                     <div>
-                      <h3 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 mb-1">
+                      <h3 className="text-2xl font-bold text-zinc-950 dark:text-zinc-50 mb-1">
                         {project.name}
                       </h3>
                       {project.award && (
                         <div className="flex items-center gap-2">
                           <span className="text-xl">🏆</span>
-                          <span className="text-sm font-semibold text-pink-600 dark:text-pink-400">
+                          <span className="text-sm font-semibold text-pink-700 dark:text-pink-400">
                             {project.award}
                           </span>
                         </div>
@@ -121,7 +121,7 @@ export default function ProjectsSection() {
                   </div>
                 </div>
 
-                <p className="mb-4 text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                <p className="mb-4 text-lg text-zinc-800 dark:text-zinc-300 leading-relaxed">
                   {project.description}
                 </p>
 
@@ -129,7 +129,7 @@ export default function ProjectsSection() {
                   {project.highlights.map((highlight, i) => (
                     <li
                       key={i}
-                      className="flex gap-3 text-zinc-700 dark:text-zinc-300"
+                      className="flex gap-3 text-zinc-800 dark:text-zinc-300"
                     >
                       <span className="text-pink-500 mt-1">▹</span>
                       <span>{highlight}</span>
@@ -142,7 +142,7 @@ export default function ProjectsSection() {
                     <motion.span
                       key={tag}
                       whileHover={{ scale: 1.1, y: -2 }}
-                      className="rounded-lg bg-pink-100/80 px-3 py-1.5 text-xs font-medium text-pink-700 backdrop-blur-sm dark:bg-pink-900/30 dark:text-pink-300"
+                      className="rounded-lg bg-pink-100/80 px-3 py-1.5 text-xs font-medium text-pink-800 backdrop-blur-sm dark:bg-pink-900/30 dark:text-pink-300"
                     >
                       {tag}
                     </motion.span>

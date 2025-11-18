@@ -108,7 +108,7 @@ function SkillBubble({ skill, idx, position }: SkillBubbleProps) {
       className="group relative flex justify-center z-40"
     >
       <div
-        className="flex h-full w-full items-center justify-center rounded-full border border-white/30 bg-white/20 shadow-xl backdrop-blur-xl transition-all dark:border-zinc-700/30 dark:bg-zinc-800/20"
+        className="flex h-full w-full items-center justify-center rounded-full border border-gray-300/50 bg-gray-300/25 shadow-xl backdrop-blur-xl transition-all dark:border-gray-500/50 dark:bg-gray-500/25"
         style={{
           width: `${size}px`,
           height: `${size}px`,
@@ -126,7 +126,7 @@ function SkillBubble({ skill, idx, position }: SkillBubbleProps) {
         />
       </div>
         <div
-          className="absolute z-[9999] right-full mr-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap rounded-lg bg-zinc-900/90 px-2 py-1 text-xs font-medium text-white dark:bg-white/90 dark:text-zinc-900"
+          className="absolute z-[9999] right-full mr-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap rounded-lg bg-white/90 px-2 py-1 text-xs font-medium text-zinc-900 dark:bg-zinc-900/90 dark:text-white"
         >
         {skill.name}
       </div>
@@ -150,7 +150,7 @@ export default function AboutSection() {
       >
         <motion.h2
           variants={itemVariants}
-          className="mb-8 text-center text-4xl font-bold text-zinc-900 dark:text-zinc-50"
+          className="mb-8 text-center text-4xl font-bold text-zinc-900 dark:text-zinc-50 sm:text-5xl"
           style={{
             textShadow: '0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3)',
           }}
@@ -165,19 +165,19 @@ export default function AboutSection() {
             {/* About Text */}
             <motion.div
               variants={itemVariants}
-              className="relative z-20 rounded-3xl border-2 border-blue-200/50 bg-gradient-to-br from-blue-50/95 via-white/95 to-indigo-50/95 p-8 shadow-2xl backdrop-blur-md dark:border-blue-800/50 dark:from-blue-950/95 dark:via-zinc-900/95 dark:to-indigo-950/95 w-full"
+              className="relative z-20 rounded-3xl border-2 border-blue-200 bg-gradient-to-br from-blue-100/80 via-white to-indigo-100/80 p-8 shadow-2xl backdrop-blur-md dark:border-blue-800/50 dark:from-blue-950/95 dark:via-zinc-900/95 dark:to-indigo-950/95 w-full"
               style={{
                 boxShadow: '0 20px 60px rgba(59, 130, 246, 0.2), 0 0 40px rgba(99, 102, 241, 0.1)',
               }}
             >
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-400/10 via-transparent to-indigo-400/10 dark:from-blue-500/10 dark:to-indigo-500/10"></div>
               <div className="relative z-10">
-                <p className="text-lg leading-8 text-zinc-700 dark:text-zinc-300">
-                  I'm a <span className="font-semibold text-blue-600 dark:text-blue-400">Computer Science student at UCLA </span>
-                  exploring my interests within software development, particularly in the fields of <span className="font-semibold">fullstack development</span> and
+                <p className="text-lg leading-8 text-zinc-800 dark:text-zinc-300">
+                  I'm a <span className="font-semibold text-blue-700 dark:text-blue-400">Computer Science student at UCLA </span>
+                  exploring my interests within software development, particularly in <span className="font-semibold">fullstack development</span> and
                   <span className="font-semibold"> distributed systems</span>.
-                  I've previously interned at <span className="font-semibold text-purple-600 dark:text-purple-400">TikHub</span> and
-                  <span className="font-semibold text-purple-600 dark:text-purple-400"> Scale AI</span>.
+                  I've previously interned at <span className="font-semibold text-purple-700 dark:text-purple-400">TikHub</span> and
+                  <span className="font-semibold text-purple-700 dark:text-purple-400"> Scale AI</span>.
                   My campus activities include organizing <span className="font-semibold">LA Hacks</span> on the tech team, being a
                   <span className="font-semibold"> Dev Team Officer for ACM</span>, and an LLMs Researcher at the
                   <span className="font-semibold"> Scalable Analytics Institute Lab</span>.
@@ -214,13 +214,13 @@ export default function AboutSection() {
                     className="group"
                   >
                     <div
-                      className="flex items-center gap-2 rounded-full border border-white/30 bg-white/20 px-4 py-2 shadow-lg backdrop-blur-xl transition-all hover:shadow-xl dark:border-zinc-700/30 dark:bg-zinc-800/20"
+                      className="flex items-center gap-2 rounded-full border border-gray-300/50 bg-gray-100/60 px-4 py-2 shadow-lg backdrop-blur-xl transition-all hover:shadow-xl dark:border-zinc-700/30 dark:bg-zinc-800/20"
                       style={{
                         boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15), inset 0 1px 1px rgba(255,255,255,0.2)',
                       }}
                     >
                       <span className="text-lg">{interest.emoji}</span>
-                      <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                      <span className="text-sm font-medium text-zinc-950 dark:text-zinc-100">
                         {interest.name}
                       </span>
                     </div>

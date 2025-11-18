@@ -33,22 +33,22 @@ export default function HeroSection() {
     >
       <motion.p
         variants={itemVariants}
-        className="mb-10 text-5xl text-zinc-600 dark:text-zinc-400 sm:text-10xl"
+        className="mb-10 text-5xl text-zinc-800 dark:text-zinc-400 sm:text-10xl"
       >
         Hello, I'm
       </motion.p>
       <motion.h2
         variants={itemVariants}
-        className="mb-12 text-6xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-7xl md:text-8xl hero-glow"
+        className="mb-12 text-6xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 sm:text-7xl md:text-8xl hero-glow"
       >
         Spandan Patel
       </motion.h2>
       <motion.p
         variants={itemVariants}
-        className="mx-auto max-w-3xl text-xl leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-2xl"
+        className="mx-auto max-w-3xl text-xl leading-relaxed text-zinc-800 dark:text-zinc-400 sm:text-2xl"
       >
         I'm a <span
-          className="relative font-semibold text-pink-600 dark:text-pink-400"
+          className="relative font-semibold text-pink-700 dark:text-pink-400"
           style={{
             textShadow: '0 0 12px rgba(236, 72, 153, 0.7), 0 0 24px rgba(236, 72, 153, 0.4)',
             filter: 'drop-shadow(0 0 10px rgba(236, 72, 153, 0.5))',
