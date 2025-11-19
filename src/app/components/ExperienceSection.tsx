@@ -65,7 +65,7 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
       transition={{ duration: 0.5 }}
     >
       <div
-        className="group relative rounded-2xl border border-indigo-500/20 bg-gradient-to-br from-indigo-500/10 to-purple-500/5 p-6 shadow-lg backdrop-blur-sm dark:border-indigo-500/30 dark:from-indigo-500/15 dark:to-purple-500/10 transition-all"
+        className="group relative rounded-2xl border border-indigo-500/20 bg-gradient-to-br from-indigo-500/10 to-purple-500/5 p-8 shadow-lg backdrop-blur-sm dark:border-indigo-500/30 dark:from-indigo-500/15 dark:to-purple-500/10 transition-all"
         style={{
           boxShadow: '0 12px 50px rgba(99, 102, 241, 0.1), 0 0 40px rgba(99, 102, 241, 0.05)',
         }}
@@ -143,7 +143,7 @@ function ExperienceGroup({ title, experiences: sectionExperiences }: ExperienceG
           {title}
         </h3>
 
-        <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6 flex-shrink-0">
+        <div className="w-full max-w-3xl grid grid-cols-1 md:grid-cols-2 gap-8 flex-shrink-0">
           {sectionExperiences.map((exp) => (
             <ExperienceCard key={`${exp.type}-${exp.company}`} exp={exp} />
           ))}
@@ -176,7 +176,7 @@ export default function ExperienceSection() {
       className="relative"
     >
       {/* Sticky Header */}
-      <div className="sticky top-20 z-40 w-full bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm border-b border-zinc-200 dark:border-zinc-800 py-6">
+      <div className="sticky top-20 z-40 w-full py-6">
         <h2
           className="text-center text-4xl font-bold text-zinc-900 dark:text-zinc-50 sm:text-5xl"
           style={{
