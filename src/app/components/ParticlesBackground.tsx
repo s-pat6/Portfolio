@@ -15,10 +15,10 @@ function getParticlesOptions(isDark: boolean) {
     particles: {
       number: { value: 120, density: { enable: true, valueArea: 800 } },
       color: { value: colors },
-      shape: { type: 'circle' },
-      size: { value: 3, random: true},
+      shape: { type: 'circle' as const },
+      size: { value: 3 },
       links: { enable: true, distance: 150, color: linkColor, opacity: 0.5, width: 1 },
-      move: { enable: true, speed: 1, direction: 'none', random: false, straight: false, outMode: 'out', bounce: false, attract: { enable: false } }
+      move: { enable: true, speed: 1, direction: 'none' as const, random: false, straight: false, outMode: 'out' as const, bounce: false, attract: { enable: false } }
     },
     interactivity: {
       detectOn: 'window',
