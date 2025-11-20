@@ -16,21 +16,20 @@ function getParticlesOptions(isDark: boolean) {
       number: { value: 120, density: { enable: true, valueArea: 800 } },
       color: { value: colors },
       shape: { type: 'circle' },
-      size: { value: 3, random: true },
-      lineLinked: { enable: true, distance: 150, color: linkColor, opacity: 0.5, width: 1 },
+      size: { value: 3, random: true},
       links: { enable: true, distance: 150, color: linkColor, opacity: 0.5, width: 1 },
-      move: { enable: true, speed: 1, direction: 'none', random: false, straight: false, outMode: 'out', bounce: false, attract: false }
+      move: { enable: true, speed: 1, direction: 'none', random: false, straight: false, outMode: 'out', bounce: false, attract: { enable: false } }
     },
     interactivity: {
       detectOn: 'window',
       events: {
         onHover: { enable: true, mode: ['grab'] },
         onClick: { enable: true, mode: ['push', 'remove'] },
-        resize: true
+        resize: { enable: true }
       },
       modes: {
-        grab: { distance: 300, lineLinked: { opacity: 0.5 }, links: { opacity: 0.5 } },
-        bubble: { distance: 200, size: 20, duration: 2, opacity: 8, speed: 3 },
+        grab: { distance: 300, links: { opacity: 0.5 } },
+        bubble: { distance: 200, size: 20, duration: 2, opacity: 0.8 },
         repulse: { distance: 200, duration: 0.4 },
         push: { particlesNb: 4 },
         remove: { particlesNb: 2 }
